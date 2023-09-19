@@ -8,7 +8,7 @@ body {
 
 :root {
   --cell-size: 100px;
-  --mark-size: calc(var(var(--cell-size) * 9));
+  --mark-size: calc(var(--cell-size) * 0.9);
 }
 
 .game-board {
@@ -24,8 +24,12 @@ body {
 
 .box {
   border: 1px solid black;
+  position: relative;
   width: var(--cell-size);
   height: var(--cell-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .box:nth-last-child(1n + 7) {
@@ -40,4 +44,21 @@ body {
 
 .box:nth-child(3n + 3) {
   border-right: none;
+}
+
+.box.x::before,
+.box.x::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--mark-size) * 0.15);
+  height: var(--mark-size);
+  background-color: black;
+}
+
+.box.x::before {
+  transform: rotate(45deg);
+}
+
+.box.x::after {
+  transform: rotate(-45deg);
 }
