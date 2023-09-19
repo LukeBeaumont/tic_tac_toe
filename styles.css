@@ -45,7 +45,7 @@ body {
 .box:nth-child(3n + 3) {
   border-right: none;
 }
-
+/*-------- X Marker---------*/
 .box.x::before,
 .box.x::after {
   content: "";
@@ -61,4 +61,23 @@ body {
 
 .box.x::after {
   transform: rotate(-45deg);
+}
+/*------- Circle Marker-------*/
+.box.o::before,
+.box.o::after {
+  content: "";
+  position: absolute;
+}
+
+.box.o::before {
+  border-radius: 50%;
+  background-color: black;
+  width: var(--mark-size);
+  height: var(--mark-size);
+}
+.box.o::after {
+  border-radius: 50%;
+  background-color: white;
+  width: calc(var(--mark-size) * 0.7);
+  height: calc(var(--mark-size) * 0.7);
 }
