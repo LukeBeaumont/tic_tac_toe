@@ -47,7 +47,9 @@ body {
 }
 /*-------- X Marker---------*/
 .box.x::before,
-.box.x::after {
+.box.x::after,
+.game-board.x .box:not(.x):not(.o):hover::before,
+.game-board.x .box:not(.x):not(.o):hover::after {
   content: "";
   position: absolute;
   width: calc(var(--mark-size) * 0.15);
@@ -55,29 +57,42 @@ body {
   background-color: black;
 }
 
-.box.x::before {
+.box.x::before,
+.game-board.x .box:not(.x):not(.o):hover::before {
   transform: rotate(45deg);
 }
 
-.box.x::after {
+.box.x::after,
+.game-board.x .box:not(.x):not(.o):hover::after {
   transform: rotate(-45deg);
 }
 /*------- Circle Marker-------*/
 .box.o::before,
-.box.o::after {
+.box.o::after,
+.game-board.o .box:not(.x):not(.o):hover::before,
+.game-board.o .box:not(.x):not(.o):hover::after {
   content: "";
   position: absolute;
 }
 
-.box.o::before {
+.box.o::before,
+.game-board.o .box:not(.x):not(.o):hover::before {
   border-radius: 50%;
   background-color: black;
   width: var(--mark-size);
   height: var(--mark-size);
 }
-.box.o::after {
+.box.o::after,
+.game-board.o .box:not(.x):not(.o):hover::after {
   border-radius: 50%;
   background-color: white;
   width: calc(var(--mark-size) * 0.7);
   height: calc(var(--mark-size) * 0.7);
+}
+
+/*-----Change hover color grey for both markers ----*/
+.game-board.x .box:not(.x):not(.o):hover::before,
+.game-board.x .box:not(.x):not(.o):hover::after,
+.game-board.o .box:not(.x):not(.o):hover::before {
+  background-color: lightgrey;
 }
