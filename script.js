@@ -22,7 +22,7 @@ function handleClick(e) {
   const currentClass = circleTurn ? "o" : "x";
   placeMark(box, currentClass);
   if (checkWin(currentClass)) {
-    console.log("winner");
+    endGame();
   }
   swapTurns();
   setHoverClass();
@@ -52,4 +52,11 @@ function checkWin(currentClass) {
       return boxes[index].classList.contains(currentClass);
     });
   });
+}
+
+function endGame() {
+  const endScreen = document.querySelector(".winner-screen");
+  endScreen.classList.add("show");
+  const winnerMessage = document.querySelector(".winner-message");
+  winnerMessage.innerText = `${circleTurn ? "O" : "X"} wins!`;
 }
