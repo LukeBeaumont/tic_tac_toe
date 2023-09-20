@@ -8,8 +8,7 @@ const winningCombos = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-const x_class = "x";
-const o_class = "o";
+
 const boxes = document.querySelectorAll("[data-cell]");
 const gameBoard = document.querySelector(".game-board");
 let circleTurn;
@@ -20,8 +19,11 @@ boxes.forEach((box) => {
 
 function handleClick(e) {
   const box = e.target;
-  const currentClass = circleTurn ? o_class : x_class;
+  const currentClass = circleTurn ? "o" : "x";
   placeMark(box, currentClass);
+  if (checkWin(currentClass)) {
+    console.log("winner");
+  }
   swapTurns();
   setHoverClass();
 }
@@ -42,4 +44,12 @@ function setHoverClass() {
   } else {
     gameBoard.classList.add("x");
   }
+}
+
+function checkWin(currentClass) {
+  return winningCombos.some((combinations) => {
+    return combinations.every((index) => {
+      return boxes[index].classList.contains(currentClass);
+    });
+  });
 }
