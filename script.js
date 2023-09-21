@@ -8,14 +8,27 @@ const winningCombos = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+const restart = document.querySelector("#restart-button");
+
+restart.addEventListener("click", startGame);
 
 const boxes = document.querySelectorAll("[data-cell]");
 const gameBoard = document.querySelector(".game-board");
+const winnerScreen = document.querySelector(".winner-screen");
 let circleTurn;
 
-boxes.forEach((box) => {
-  box.addEventListener("click", handleClick, { once: true });
-});
+startGame();
+
+function startGame() {
+  circleTurn = false;
+  boxes.forEach((box) => {
+    box.classList.remove("x");
+    box.classList.remove("o");
+    box.addEventListener("click", handleClick, { once: true });
+  });
+  setHoverClass();
+  winnerScreen.classList.remove("show");
+}
 
 function handleClick(e) {
   const box = e.target;
@@ -59,7 +72,6 @@ function checkWin(currentClass) {
 
 function endGame(draw) {
   const winnerMessage = document.querySelector(".winner-message");
-  const winnerScreen = document.querySelector(".winner-screen");
   if (draw) {
     winnerMessage.innerText = "Its a draw";
   } else {
