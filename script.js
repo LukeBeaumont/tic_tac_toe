@@ -22,10 +22,13 @@ function handleClick(e) {
   const currentClass = circleTurn ? "o" : "x";
   placeMark(box, currentClass);
   if (checkWin(currentClass)) {
-    endGame();
+    endGame(false);
+  } else if (isDraw()) {
+    endGame(true);
+  } else {
+    swapTurns();
+    setHoverClass();
   }
-  swapTurns();
-  setHoverClass();
 }
 
 function placeMark(box, currentClass) {
@@ -54,9 +57,19 @@ function checkWin(currentClass) {
   });
 }
 
-function endGame() {
-  const endScreen = document.querySelector(".winner-screen");
-  endScreen.classList.add("show");
+function endGame(draw) {
   const winnerMessage = document.querySelector(".winner-message");
-  winnerMessage.innerText = `${circleTurn ? "O" : "X"} wins!`;
+  const winnerScreen = document.querySelector(".winner-screen");
+  if (draw) {
+    winnerMessage.innerText = "Its a draw";
+  } else {
+    winnerMessage.innerText = `${circleTurn ? "O's" : "X's"} win!`;
+  }
+  winnerScreen.classList.add("show");
+}
+
+function isDraw() {
+  return [...boxes].every((box) => {
+    return box.classList.contains("x") || box.classList.contains("o");
+  });
 }
